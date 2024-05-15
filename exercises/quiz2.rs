@@ -37,13 +37,11 @@ pub mod my_module {
             // TODO: Complete the function body. You can do it!
             match command {
                 Command::Append(i) => {
-                    for _ in 0..(i as i32) {
-                        let mut updated_string = string.clone();
-
+                    let mut updated_string = string.clone();
+                    for _ in 0..(*i as i32) {
                         updated_string.push_str("bar");
-
-                        output.push(updated_string);
                     }
+                    output.push(updated_string);
                 }
                 Command::Trim => {
                     output.push(string.trim().into());
