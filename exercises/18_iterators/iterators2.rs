@@ -8,15 +8,21 @@
 
 // I AM NOT DONE
 
+use std::vec;
+
 // Step 1.
 // Complete the `capitalize_first` function.
 // "hello" -> "Hello"
 pub fn capitalize_first(input: &str) -> String {
     let mut c = input.chars();
     match c.next() {
-        None => String::new(),
-        Some(first) => ???,
+        None => return String::new(),
+        Some(mut first) => {
+            first = first.to_ascii_uppercase();
+        }
     }
+    c.collect::<String>()
+
 }
 
 // Step 2.
@@ -24,7 +30,11 @@ pub fn capitalize_first(input: &str) -> String {
 // Return a vector of strings.
 // ["hello", "world"] -> ["Hello", "World"]
 pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
-    vec![]
+    let mut output = vec![];
+    for item in words.iter() {
+        output.push(item.to_ascii_uppercase());
+    }
+    output
 }
 
 // Step 3.
@@ -32,7 +42,12 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // Return a single string.
 // ["hello", " ", "world"] -> "Hello World"
 pub fn capitalize_words_string(words: &[&str]) -> String {
-    String::new()
+    let mut output = String::new();
+    for item in words.iter() {
+        output.push_str(&item.to_ascii_uppercase());
+    }
+
+    output
 }
 
 #[cfg(test)]
