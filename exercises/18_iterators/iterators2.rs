@@ -6,8 +6,6 @@
 // Execute `rustlings hint iterators2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 use std::vec;
 
 // Step 1.
@@ -18,11 +16,10 @@ pub fn capitalize_first(input: &str) -> String {
     match c.next() {
         None => return String::new(),
         Some(mut first) => {
-            first = first.to_ascii_uppercase();
+            let capitalized = first.to_ascii_uppercase();
+            return capitalized.to_string() + c.as_str();
         }
     }
-    c.collect::<String>()
-
 }
 
 // Step 2.
@@ -32,7 +29,7 @@ pub fn capitalize_first(input: &str) -> String {
 pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
     let mut output = vec![];
     for item in words.iter() {
-        output.push(item.to_ascii_uppercase());
+        output.push(item[0..1].to_ascii_uppercase() + &item[1..]);
     }
     output
 }
@@ -43,8 +40,8 @@ pub fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
 // ["hello", " ", "world"] -> "Hello World"
 pub fn capitalize_words_string(words: &[&str]) -> String {
     let mut output = String::new();
-    for item in words.iter() {
-        output.push_str(&item.to_ascii_uppercase());
+    for mut item in words.iter() {
+        output.push_str(&(item[0..1].to_ascii_uppercase() + &item[1..]));
     }
 
     output
