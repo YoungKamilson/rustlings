@@ -58,9 +58,16 @@ impl FromStr for Person {
             return Err(ParsePersonError::BadLen);
         }
 
-        let age = splitted[1]
-            .parse::<usize>()
-            .unwrap_or(|e| Err(ParsePersonError::ParseInt(e)));
+        if splitted[0].len() == 0 {
+            return Err(ParsePersonError::NoName);
+        }
+
+        let age = splitted[1].parse::<usize>();
+
+        let age = match age {
+            Ok(v) => v,
+            Err(e) => return Err(ParsePersonError::ParseInt(e)),
+        };
 
         Ok(Person {
             name: splitted[0].to_string(),
